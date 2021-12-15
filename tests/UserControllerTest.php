@@ -67,4 +67,10 @@ class UserControllerTest extends TestCase
 
         $this->assertSame(false, $user->isValid());
     }
+    public function testPasswordNull()
+    {
+        $user = new User('test@test.fr', 'Jhon', 'DOE', '13-02-2000', '');
+
+        $this->assertSame(false, $user->isValid());
+    }
 }
