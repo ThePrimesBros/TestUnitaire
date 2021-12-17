@@ -5,7 +5,7 @@ namespace App\Entity;
 //use AppBundle\src\Controller\CalculetteController;
 use PHPUnit\Framework\TestCase;
 
-class UserControllerTest extends TestCase
+class UserTest extends TestCase
 {
     public function testIfNamePasPresent()
     {
