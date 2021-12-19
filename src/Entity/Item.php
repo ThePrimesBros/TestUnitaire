@@ -46,10 +46,6 @@ class Item
             return false;
         }else if(empty($this->content)){
             return false;
-        }else if(empty($this->createdAt)){
-            return false;
-        }else if(strtotime($this->createdAt) == false){
-            return false;
         }else{
             return true;
         }
