@@ -5,7 +5,7 @@ namespace App\Tests;
 use App\Entity\Item;
 use PHPUnit\Framework\TestCase;
 
-class ItemControllerTest extends TestCase
+class ItemTest extends TestCase
 {
     public function testItemIsCreated()
     {
