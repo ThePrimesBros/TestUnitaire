@@ -42,13 +42,16 @@ class Item
     }
 
     public function isValid(){
+        $d = DateTime::createFromFormat('d-m-Y H:i:s', $this->createdAt);
+        $date_valid = $d && $d->format('d-m-Y H:i:s') === $this->createdAt;
+        //var_dump($date_valid);
         if(empty($this->name)){
             return false;
         }else if(empty($this->content)){
             return false;
         }else if(strlen($this->content) > 1000){
             return false;
-        }else if(!strtotime($this->createdAt)){
+        }else if($date_valid == false){
             return false;
         }else{
             return true;
@@ -84,9 +87,14 @@ class Item
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    /*public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
+    }*/
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
     }
 
     public function setCreatedAt(\DateTimeImmutable $created_at): self

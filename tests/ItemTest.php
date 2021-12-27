@@ -9,22 +9,22 @@ class ItemTest extends TestCase
 {
     public function testItemIsCreated()
     {
-        $user = new Item('nom', 'content', '12-12-2021');
+        $item = new Item('nom', 'content', '12-12-2021 12:30:00');
 
-        $this->assertSame(true, $user->isValid());
+        $this->assertSame(true, $item->isValid());
     }
 
     public function testDateVide()
     {
-        $user = new Item('nom', 'content', '');
+        $item = new Item('nom', 'content', '');
 
-        $this->assertSame(false, $user->isValid());
+        $this->assertSame(false, $item->isValid());
     }
 
     public function testDatePasBone()
     {
-        $user = new Item('nom', 'content', '12-30-2');
+        $item = new Item('nom', 'content', '12-30-2');
 
-        $this->assertSame(false, $user->isValid());
+        $this->assertSame(false, $item->isValid());
     }
 }

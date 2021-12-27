@@ -46,10 +46,21 @@ class TodoList
 
     public function add($item){
 
-        array_push($this->Items, $item);
+        $key = count(array_keys($this->Items));
+        if($key != 0){
+            $key = $key-1;
+            $date_crea_last_item = $this->Items[$key]->createdAt;
+            $date_crea_item = $item->getCreatedAt();
+            $diff = date_diff(date_create($date_crea_last_item), date_create($date_crea_item));
+            //var_dump($diff);
+            if($diff->format('%h') == 0 && $diff->format('%i') < 30){
+                return false;
+            }
+        }
         if(in_array($item->getName(), $this->Items)) {
             return false;
         }else{
+            array_push($this->Items, $item);
             return true;
         }
 
