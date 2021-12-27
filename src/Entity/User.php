@@ -17,6 +17,66 @@ class User
 
     private $password;
 
+    public function getMail(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
+
+        return $this;
+    }
+    
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }  
+    
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+    
+    public function getBirthday(): ?string
+    {
+        return $this->birthday;
+    }
+
+    public function setBirthday(string $birthday): self
+    {
+        $this->birthday = $birthday;
+
+        return $this;
+    }
+    
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+    
 
     public function __construct($mail, $name, $prenom, $birthday, $password)
     {
