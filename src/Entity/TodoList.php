@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\TodoListRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\EmailSenderService;
+use App\Repository\TodoListRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass=TodoListRepository::class)
@@ -36,8 +37,10 @@ class TodoList
 
     public function isValid(){
         //Fonction de test
-
-        if(count($this->Items) > 10){
+        if(count($this->Items) == 8){
+            $EmailSenderService = new EmailSenderService();
+            return $EmailSenderService->SendMessage('test@test.fr');
+        }else if(count($this->Items) > 10){
             return false;
         }else{
             return true;
@@ -52,18 +55,19 @@ class TodoList
             $date_crea_last_item = $this->Items[$key]->createdAt;
             $date_crea_item = $item->getCreatedAt();
             $diff = date_diff(date_create($date_crea_last_item), date_create($date_crea_item));
-            //var_dump($diff);
             if($diff->format('%h') == 0 && $diff->format('%i') < 30){
                 return false;
             }
         }
-        if(in_array($item->getName(), $this->Items)) {
-            return false;
-        }else{
-            array_push($this->Items, $item);
-            return true;
+        
+        foreach($this->Items as $tests){
+            if($item->getName() == $tests->getName()){
+                return false;
+            }
         }
 
+        array_push($this->Items, $item);
+        return true;
     }
 
     public function getId(): ?int
