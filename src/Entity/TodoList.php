@@ -31,7 +31,28 @@ class TodoList
 
     public function __construct()
     {
-        $this->Items = new ArrayCollection();
+        $this->Items = [];
+    }
+
+    public function isValid(){
+        //Fonction de test
+
+        if(count($this->Items) > 10){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    public function add($item){
+
+        array_push($this->Items, $item);
+        if(in_array($item->getName(), $this->Items)) {
+            return false;
+        }else{
+            return true;
+        }
+
     }
 
     public function getId(): ?int
@@ -59,7 +80,7 @@ class TodoList
         return $this->Items;
     }
 
-    public function addItem(Item $item): self
+    public function addItem($item): self
     {
         if (!$this->Items->contains($item)) {
             $this->Items[] = $item;

@@ -11,7 +11,7 @@ class EmailSenderService
         $this->EmailSenderService = $EmailSenderService;
     }
 
-    public function SendMessage(User $mail)
+    public function SendMessage($mail)
     {
         $to      = `$mail`;
         $subject = 'le sujet';

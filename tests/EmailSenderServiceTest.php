@@ -3,7 +3,6 @@
 namespace App\Tests;
 
 use App\Entity\EmailSenderService;
-use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 
 
@@ -11,15 +10,11 @@ class EmailSenderServiceTest extends TestCase
 {
     public function testSendMessage()
     {
-        $EmailSenderService = $this->createMock(SendMessage::class);
+        $EmailSenderService = $this->createMock(EmailSenderService::class);
         
-        $EmailSenderService->method('send')
+        $EmailSenderService->method('SendMessage')
             ->willReturn('foo');
 
-        $this->assertEquals('foo', $EmailSenderService->send());
-
-        /*$user = new User($mail, $name);
-        $user->SetMail('mail@test.com');
-        $user->setName('Prenomtest');*/
+        $this->assertEquals('foo', $EmailSenderService->SendMessage('test@test.fr'));
     }
 }

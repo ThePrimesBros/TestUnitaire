@@ -34,17 +34,21 @@ class Item
      */
     private $created_at;
 
-    public function __construct($name, $content)
+    public function __construct($name, $content, $date)
     {
         $this->name = $name;
         $this->content = $content;
-        $this->createdAt = new DateTime();
+        $this->createdAt = $date;
     }
 
     public function isValid(){
         if(empty($this->name)){
             return false;
         }else if(empty($this->content)){
+            return false;
+        }else if(strlen($this->content) > 1000){
+            return false;
+        }else if(!strtotime($this->createdAt)){
             return false;
         }else{
             return true;
