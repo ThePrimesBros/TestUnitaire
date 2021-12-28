@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Entity;
+use App\Entity\Todolist;
+
 
 use DateTime;
 
@@ -17,6 +19,8 @@ class User
 
     private $password;
 
+    private $todolist;
+
     public function getMail(): ?string
     {
         return $this->name;
@@ -32,6 +36,18 @@ class User
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function getTodolist(): ?Todolist
+    {
+        return $this->todolist;
+    }
+
+    public function setTodolist(?Todolist $todolist): self
+    {
+        $this->todolist = $todolist;
+
+        return $this;
     }
 
     public function setName(string $name): self
@@ -85,6 +101,7 @@ class User
         $this->prenom = $prenom;
         $this->birthday = $birthday;
         $this->password = $password;
+        $this->todolist = new Todolist();
     }
 
     public function isValid(){
