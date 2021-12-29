@@ -5,6 +5,7 @@ use App\Entity\Todolist;
 
 
 use DateTime;
+use Symfony\Component\Validator\Constraints\Length;
 
 class User
 {
@@ -94,20 +95,21 @@ class User
     }
     
 
-    public function __construct($mail, $name, $prenom, $birthday, $password)
+    public function __construct($mail, $name, $prenom, $birthday, $password, $todolist = [])
     {
         $this->mail = $mail;
         $this->name = $name;
         $this->prenom = $prenom;
         $this->birthday = $birthday;
         $this->password = $password;
-        $this->todolist = new Todolist();
+        $this->todolist = $todolist;
     }
 
     public function isValid(){
         $birthDate = $this->birthday;
         $today = date("Y-m-d");
         $diff = date_diff(date_create($birthDate), date_create($today));
+        $todo = $this->todolist;
 
         if(empty($this->prenom)){
             return false;
@@ -124,6 +126,10 @@ class User
         }else if(strlen($this->password) < 7 ){
             return false;
         }else if(strlen($this->password) > 40){
+            return false;
+        }else if($this->todolist == ""){
+            return false;
+        }else if(count($todo) > 2){
             return false;
         }else{
             return true;

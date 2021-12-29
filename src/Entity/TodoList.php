@@ -94,28 +94,5 @@ class TodoList
     {
         return $this->Items;
     }
-
-    public function addItem($item): self
-    {
-        if (!$this->Items->contains($item)) {
-            $this->Items[] = $item;
-            $item->setTodoList($this);
-        }
-
-        return $this;
-    }
-
-    public function removeItem(Item $item): self
-    {
-        if ($this->Items->removeElement($item)) {
-            // set the owning side to null (unless already changed)
-            if ($item->getTodoList() === $this) {
-                $item->setTodoList(null);
-            }
-        }
-
-        return $this;
-    }
-
     
 }
